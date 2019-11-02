@@ -187,7 +187,7 @@ const App: React.FC = (props: any) => {
                   </Route>
                   <Route path="/tags/:tag" component={BrowseTags}>
                   </Route>
-                  <Route path="/tags/:tag" component={BrowseBudget}>
+                  <Route path="/budget/browse" component={BrowseBudget}>
                   </Route>
                </Switch>
             </Grid>
@@ -202,7 +202,7 @@ const App: React.FC = (props: any) => {
 
 
 const mapStateToProps = (state: any) => {
-  alert(JSON.stringify(state.notes_reducer.tags));
+  //alert(JSON.stringify(state.notes_reducer.tags));
 
   return {
 //    todos: getVisibleTodos(state.todos, state.visibilityFilter)

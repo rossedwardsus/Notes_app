@@ -24,6 +24,13 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 import { addItem } from './budget_actions';
 
@@ -56,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 class BrowseBudget extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {description: "", amount: ""}
+    this.state = {description: "", datetime: "", amount: "", selectedDate: new Date()}
   }
 
   changeDescription = (e: any) => {
@@ -67,9 +74,21 @@ class BrowseBudget extends React.Component<any, any> {
 
   }
 
+  changeDatetime = (e: any) => {
+
+    this.setState({datetime: e.target.value});
+
+  }
+
   changeAmount = (e: any) => {
 
     this.setState({amount: e.target.value});
+
+  }
+
+  handleDateChange = (e: any) => {
+
+    this.setState({selectedDate: e});
 
   }
 
@@ -77,14 +96,14 @@ class BrowseBudget extends React.Component<any, any> {
 
     //alert("add");
 
-    this.props.addNote(this.state.description, this.state.amount);
+    this.props.addItem(this.state.description, this.state.amount);
 
   }
 
   render(){
     //const classes = useStyles();
     const {items} = this.props;
-    const {description, amount} = this.state;
+    const {description, datetime, amount, selectedDate} = this.state;
 
     return (
           <div>
@@ -99,17 +118,25 @@ class BrowseBudget extends React.Component<any, any> {
                 onChange={(e) => this.changeDescription(e)}
                 margin="normal"
               />
-              <TextField
-                id="standard-name"
-                label="Datetime"
-                value={amount}
-                onChange={(e) => this.changeAmount(e)}
-                margin="normal"
-              />
+             <MuiPickersUtilsProvider utils={DateFnsUtils}>
+               <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Date picker inline"
+                  value={selectedDate}
+                  onChange={this.handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
               <TextField
                 id="standard-name"
                 label="Amount"
-                value={"tag"}
+                value={amount}
                 onChange={(e) => this.changeAmount(e)}
                 margin="normal"
               />
@@ -132,7 +159,7 @@ class BrowseBudget extends React.Component<any, any> {
             Car registration
             <br/>
             <br/>
-            {items.map((item: any) => <div>{item.description}</div>)}
+            {items.map((item: any) => <div>{item.description}hello</div>)}
         </div>
       );
   }
@@ -141,11 +168,11 @@ class BrowseBudget extends React.Component<any, any> {
 //export default AddNote;
 
 const mapStateToProps = (state: any) => {
-  alert(JSON.stringify(state));
+  //alert(JSON.stringify(state.budget_reducer.items));
 
   return {
 //    todos: getVisibleTodos(state.todos, state.visibilityFilter)
-      notes: state.notes
+      items: state.budget_reducer.items
   }
 }
 
