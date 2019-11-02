@@ -1,14 +1,14 @@
-import { ADD_NOTE, UPDATE_NOTE, ADD_TAG } from "./types"
+import { ADD_ITEM, UPDATE_NOTE, ADD_TAG } from "./types"
 
 
-export function addNote(title: any, note: any) {
+export function addItem(description: any, amount: any) {
 
   //alert(title);
 
   return {
-    type: ADD_NOTE,
-    title, 
-    note
+    type: ADD_ITEM,
+    description, 
+    amount
   }
 }
 

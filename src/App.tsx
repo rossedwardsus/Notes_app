@@ -134,12 +134,13 @@ const App: React.FC = (props: any) => {
                         <Link to="/tags/browse">Browse tags</Link>
                       </li>
                       <br/>
-                      {tags.map((tag: any) => <div><Link to={"/tags/" + tag}/></div>)}
+                      {tags.map((tag: any) => <div><Link to={"/tags/" + tag}/>{tag}</div>)}
+                      <br/>
                       <br/>
                       Budget
                       <br/>
                       <li>
-                        <Link to="/tags/browse">Browse tags</Link>
+                        <Link to="/budget/browse">Browse budget</Link>
                       </li>
                     </ul>
                   </nav>
@@ -201,11 +202,11 @@ const App: React.FC = (props: any) => {
 
 
 const mapStateToProps = (state: any) => {
-  //alert(JSON.stringify(state));
+  alert(JSON.stringify(state.notes_reducer.tags));
 
   return {
 //    todos: getVisibleTodos(state.todos, state.visibilityFilter)
-      tags: state.tags
+      tags: state.notes_reducer.tags
   }
 }
 

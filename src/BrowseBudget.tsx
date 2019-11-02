@@ -21,8 +21,11 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import { addNote } from './actions';
+
+import { addItem } from './budget_actions';
 
 
 //import axios from 'axios';
@@ -53,35 +56,35 @@ const useStyles = makeStyles(theme => ({
 class BrowseBudget extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {title: "", note: ""}
+    this.state = {description: "", amount: ""}
   }
 
-  changeTitle = (e: any) => {
+  changeDescription = (e: any) => {
 
     //alert(e.target.value)
 
-    this.setState({title: e.target.value});
+    this.setState({description: e.target.value});
 
   }
 
-  changeNote = (e: any) => {
+  changeAmount = (e: any) => {
 
-    this.setState({note: e.target.value});
+    this.setState({amount: e.target.value});
 
   }
 
-  addNote = () => {
+  addItem = () => {
 
     //alert("add");
 
-    this.props.addNote(this.state.title, this.state.note);
+    this.props.addNote(this.state.description, this.state.amount);
 
   }
 
   render(){
     //const classes = useStyles();
-    const {notes} = this.props;
-    const {title} = this.state
+    const {items} = this.props;
+    const {description, amount} = this.state;
 
     return (
           <div>
@@ -92,30 +95,29 @@ class BrowseBudget extends React.Component<any, any> {
               <TextField
                 id="standard-name"
                 label="Description"
-                value={tag}
-                onChange={(e) => this.changeTag(e)}
+                value={description}
+                onChange={(e) => this.changeDescription(e)}
                 margin="normal"
               />
               <TextField
                 id="standard-name"
                 label="Datetime"
-                value={tag}
-                onChange={(e) => this.changeTag(e)}
+                value={amount}
+                onChange={(e) => this.changeAmount(e)}
                 margin="normal"
               />
               <TextField
                 id="standard-name"
                 label="Amount"
-                value={tag}
-                onChange={(e) => this.changeTag(e)}
+                value={"tag"}
+                onChange={(e) => this.changeAmount(e)}
                 margin="normal"
               />
             </FormGroup>
             <br/>
             <br/>
             <br/>
-            <Button disabled={false} onClick={() => this.addTag()}>Add Item</Button>
-
+            <Button disabled={false} onClick={() => this.addItem()}>Add Item</Button>
             <br/>
             Sort
             <br/>
@@ -124,13 +126,13 @@ class BrowseBudget extends React.Component<any, any> {
             Description-Datetime-Amount
             <br/>
             Grocery Shopping-date-amount spent
-            <br>
+            <br/>
             Upwork credits-date-amount spent
             <br/>
             Car registration
             <br/>
             <br/>
-            {notes.map((note: any) => <div><Link to="/notes/1">{note.title}</Link></div>)}
+            {items.map((item: any) => <div>{item.description}</div>)}
         </div>
       );
   }
@@ -149,8 +151,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addNote(title: any, note: any){
-      dispatch(addNote(title, note))
+    addItem(description: any, amount: any){
+      dispatch(addItem(description, amount))
     }
   }
 }
