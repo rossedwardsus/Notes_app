@@ -29,7 +29,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-import { addNote } from './actions';
+import { addTag } from './actions';
 
 
 //import axios from 'axios';
@@ -57,23 +57,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export class AddNote extends React.Component<any, any> {
+export class AddTag extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {title: "", note: "", checkedMoving: true, checkedReact: true}
+    this.state = {tag: "", note: "", checkedMoving: true, checkedReact: true}
   }
 
-  changeTitle = (e: any) => {
+  changeTag = (e: any) => {
 
     //alert(e.target.value)
 
-    this.setState({title: e.target.value});
-
-  }
-
-  changeNote = (e: any) => {
-
-    this.setState({note: e.target.value});
+    this.setState({tag: e.target.value});
 
   }
 
@@ -106,63 +100,40 @@ export class AddNote extends React.Component<any, any> {
 
   }
 
-  addNote = () => {
+  addTag = () => {
 
     //alert("add");
 
-    this.props.addNote(this.state.title, this.state.note);
-    //clear text field
-    // say note added!
+    this.props.addTag(this.state.tag);
 
   }
 
   render(){
     //const classes = useStyles();
     const {addNote} = this.props;
-    const {title, checkedMoving, checkedReact} = this.state
+    const {tag, checkedMoving, checkedReact} = this.state
 
     return (
           <div>
             <br/>
             <br/>
-            Add note
+            <br/>
+            <br/>
+            Add Tag
+            <br/>
+            <br/>
             <br/>
             <TextField
               id="standard-name"
-              label="Title"
-              value={title}
-              onChange={(e) => this.changeTitle(e)}
-              margin="normal"
-            />
-            <br/>
-            Tags
-            <br/>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox checked={checkedMoving} onChange={() => this. handleChange('checkedMoving')} value="moving" />
-                }
-                label="Moving"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox checked={checkedReact} onChange={() => this. handleChange('checkedReact')} value="react" />
-                }
-                label="React"
-              />
-            </FormGroup>
-            <TextField
-              id="standard-multiline-flexible"
-              label="Note"
-              multiline
-              rows="5"
-              value={this.state.note}
-              onChange={(e) => this.changeNote(e)}
+              label="Tag"
+              value={tag}
+              onChange={(e) => this.changeTag(e)}
               margin="normal"
             />
             <br/>
             <br/>
-            <Button disabled={false} onClick={() => this.addNote()}>Submit</Button>
+            <br/>
+            <Button disabled={false} onClick={() => this.addTag()}>Submit</Button>
 
         </div>
       );
@@ -181,16 +152,16 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addNote(title: any, note: any){
-      dispatch(addNote(title, note))
+    addTag(tag: any){
+      dispatch(addTag(tag))
     }
   }
 }
 
-const AddNoteConnected = connect(
+const AddTagConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddNote)
+)(AddTag)
 
-export default AddNoteConnected
+export default AddTagConnected
 

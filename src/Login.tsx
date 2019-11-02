@@ -125,7 +125,13 @@ export class AddNote extends React.Component<any, any> {
           <div>
             <br/>
             <br/>
+            <br/>
+            <br/>
             Add note
+            <br/>
+            <br/>
+            <br/>
+            Title
             <br/>
             <TextField
               id="standard-name"
@@ -151,11 +157,14 @@ export class AddNote extends React.Component<any, any> {
                 label="React"
               />
             </FormGroup>
+            <br/>
+            Note
+            <br/>
             <TextField
               id="standard-multiline-flexible"
               label="Note"
               multiline
-              rows="5"
+              rows="10"
               value={this.state.note}
               onChange={(e) => this.changeNote(e)}
               margin="normal"
@@ -163,7 +172,8 @@ export class AddNote extends React.Component<any, any> {
             <br/>
             <br/>
             <Button disabled={false} onClick={() => this.addNote()}>Submit</Button>
-
+            <br/>
+            botton tabs
         </div>
       );
   }
