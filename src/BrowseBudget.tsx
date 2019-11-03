@@ -6,6 +6,16 @@ import { connect } from 'react-redux'
 import { Dispatch, Action } from 'redux'
 import { ThunkDispatch } from 'redux-thunk';
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    match,
+    RouteProps,
+    RouteComponentProps
+} from 'react-router-dom';
+import { History } from 'history';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -39,7 +49,7 @@ import { addItem } from './budget_actions';
 
 //import axios from 'axios';
 
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,16 +72,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+//"match":{"path":"/budget/browse","url":"/budget/browse","isExact":true,"params":{}}}
 
-//interface state {notes_reducer: {notes:any, tags: any}, budget_reducer: {items: any, tags: any}}
-//interface props {match}
+interface Identifiable {id: string; }
+
+//interface storeState {notes_reducer: {notes:any, tags: any}, budget_reducer: {items: any, tags: any}}
+interface storeProps {match: any, history: any, location: any, items: any, addItem: (description: any, date: any, amount: any) => {}}
+
 interface budgetState {
     description: string, 
     amount: string, 
     selectedDate: any
 }
 
-class BrowseBudget extends React.Component<any, budgetState> {
+class BrowseBudget extends React.Component<storeProps, budgetState> {
   constructor(props: any) {
     super(props);
     this.state = {description: "", amount: "", selectedDate: new Date().toDateString()}
@@ -109,7 +123,7 @@ class BrowseBudget extends React.Component<any, budgetState> {
 
     //alert(this.state.selectedDate);
 
-    //this.props.addItem(this.state.description, this.state.selectedDate, this.state.amount);
+    this.props.addItem(this.state.description, this.state.selectedDate, this.state.amount);
 
   }
 
@@ -118,13 +132,21 @@ class BrowseBudget extends React.Component<any, budgetState> {
     const {items} = this.props;
     const {description, amount, selectedDate} = this.state;
 
+    //map reduce mount
+    const total_amount = items.reduce((sum: any, item: any) => { return sum + parseFloat(item.amount) }, 0) 
+
+    //alert(JSON.stringify(total_amount.toFixed(2)));
+
     return (
           <div>
             <br/>
             <br/>
             <br/>
             <br/>
-            total
+            Total
+            <br/>
+            {total_amount.toFixed(2)}
+            <br/>
             <br/>
             from date time date
             <br/>
@@ -188,12 +210,14 @@ class BrowseBudget extends React.Component<any, budgetState> {
 
 //export default AddNote;
 
-const mapStateToProps = (state: any) => {
-  alert(JSON.stringify(state.budget_reducer.items));
+const mapStateToProps = (state: any,  ownProps: storeProps) => {
+  //alert(JSON.stringify(state.budget_reducer.items));
+  //alert(JSON.stringify(ownProps));
 
   return {
 //    todos: getVisibleTodos(state.todos, state.visibilityFilter)
-      items: state.budget_reducer.items
+      items: state.budget_reducer.items,
+      //notes: state.notes_reducer.notes
   }
 }
 

@@ -10,12 +10,12 @@ export const addItem = (description: any, date: any, amount: any) => {
     //addItemSuccess();
   
   //alert(title);
-    return {
+    dispatch({
       type: ADD_ITEM,
       description, 
       date, 
       amount
-    }
+    })
   }
 }
 
