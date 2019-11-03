@@ -1,10 +1,16 @@
 import { ADD_NOTE, UPDATE_NOTE, ADD_TAG } from './types'
 
-const initialState = {
+
+export type NotesState = {
+  notes: [any],
+  tags: [any]
+};
+
+const initialState: Readonly<NotesState> = {
   notes: [{title: "an initial title", note: "an initial note"}], tags: ["move"]
 }
 
-function notes(state = initialState, action: any) {
+function notes(state: NotesState = initialState, action: any) {
   //if (typeof state === 'undefined') {
   //  return initialState
   //}

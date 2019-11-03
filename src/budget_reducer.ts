@@ -1,17 +1,26 @@
 import { ADD_ITEM, UPDATE_NOTE, ADD_TAG } from './types'
 
-const initialState = {
-  items: [{description: "groceries", amount: "20.00"}], tags: ["move"]
+export type BudgetState = {
+  items: [{description: string, date: string, amount: string}],
+  tags: [any]
+};
+
+const initialState: Readonly<BudgetState> = {
+  items: [{description: "groceries", date: "date", amount: "20.00"}], tags: ["move"]
 }
 
-function notes(state = initialState, action: any) {
+export interface AddItemAction { type: string, description: string, date: any, amount: string }
+
+export type ItemAction = AddItemAction;
+
+function notes(state: BudgetState = initialState, action: ItemAction) {
   //if (typeof state === 'undefined') {
   //  return initialState
   //}
   switch (action.type) {
     case ADD_ITEM:
     	//alert("reducer")
-    	return Object.assign({}, state, {items: [...state.items, {description: action.description, amount: action.amount}]})
+    	return Object.assign({}, state, {items: [...state.items, {description: action.description, date: action.date, amount: action.amount}]})
 
    	case UPDATE_NOTE:
     	//alert("update reducer")

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import { connect } from 'react-redux'
+import { Dispatch, Action } from 'redux'
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -63,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 class BrowseBudget extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {description: "", datetime: "", amount: "", selectedDate: new Date()}
+    this.state = {description: "", amount: "", selectedDate: new Date().toDateString()}
   }
 
   changeDescription = (e: any) => {
@@ -88,15 +89,17 @@ class BrowseBudget extends React.Component<any, any> {
 
   handleDateChange = (e: any) => {
 
+    //alert(e)
+
     this.setState({selectedDate: e});
 
   }
 
   addItem = () => {
 
-    //alert("add");
+    //alert(this.state.selectedDate);
 
-    this.props.addItem(this.state.description, this.state.amount);
+    this.props.addItem(this.state.description, this.state.selectedDate, this.state.amount);
 
   }
 
@@ -107,6 +110,14 @@ class BrowseBudget extends React.Component<any, any> {
 
     return (
           <div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            total
+            <br/>
+            from date time date
+            <br/>
             <br/>
             Add Budget Item
             <br/>
@@ -159,7 +170,7 @@ class BrowseBudget extends React.Component<any, any> {
             Car registration
             <br/>
             <br/>
-            {items.map((item: any) => <div>{item.description}hello</div>)}
+            {items.map((item: any) => <div>{item.description}{item.date}{item.amount}</div>)}
         </div>
       );
   }
@@ -168,7 +179,7 @@ class BrowseBudget extends React.Component<any, any> {
 //export default AddNote;
 
 const mapStateToProps = (state: any) => {
-  //alert(JSON.stringify(state.budget_reducer.items));
+  alert(JSON.stringify(state.budget_reducer.items));
 
   return {
 //    todos: getVisibleTodos(state.todos, state.visibilityFilter)
@@ -176,10 +187,10 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
-    addItem(description: any, amount: any){
-      dispatch(addItem(description, amount))
+    addItem(description: any, date: any, amount: any){
+      dispatch(addItem(description, date, amount))
     }
   }
 }
