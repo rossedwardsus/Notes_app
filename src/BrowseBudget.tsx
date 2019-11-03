@@ -4,6 +4,7 @@ import './App.css';
 
 import { connect } from 'react-redux'
 import { Dispatch, Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -61,7 +62,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-class BrowseBudget extends React.Component<any, any> {
+
+//interface state {notes_reducer: {notes:any, tags: any}, budget_reducer: {items: any, tags: any}}
+//interface props {match}
+interface budgetState {
+    description: string, 
+    amount: string, 
+    selectedDate: any
+}
+
+class BrowseBudget extends React.Component<any, budgetState> {
   constructor(props: any) {
     super(props);
     this.state = {description: "", amount: "", selectedDate: new Date().toDateString()}
@@ -77,7 +87,7 @@ class BrowseBudget extends React.Component<any, any> {
 
   changeDatetime = (e: any) => {
 
-    this.setState({datetime: e.target.value});
+    this.setState({selectedDate: e.target.value});
 
   }
 
@@ -99,14 +109,14 @@ class BrowseBudget extends React.Component<any, any> {
 
     //alert(this.state.selectedDate);
 
-    this.props.addItem(this.state.description, this.state.selectedDate, this.state.amount);
+    //this.props.addItem(this.state.description, this.state.selectedDate, this.state.amount);
 
   }
 
   render(){
     //const classes = useStyles();
     const {items} = this.props;
-    const {description, datetime, amount, selectedDate} = this.state;
+    const {description, amount, selectedDate} = this.state;
 
     return (
           <div>
@@ -187,7 +197,10 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+//state, e, actiontypes
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>) => {
+
+//const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
     addItem(description: any, date: any, amount: any){
       dispatch(addItem(description, date, amount))

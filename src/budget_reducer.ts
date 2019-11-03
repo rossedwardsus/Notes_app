@@ -9,6 +9,8 @@ const initialState: Readonly<BudgetState> = {
   items: [{description: "groceries", date: "date", amount: "20.00"}], tags: ["move"]
 }
 
+export type ADD_ITEM_TYPE = {type: string};
+
 export interface AddItemAction { type: string, description: string, date: any, amount: string }
 
 export type ItemAction = AddItemAction;
@@ -22,12 +24,12 @@ function notes(state: BudgetState = initialState, action: ItemAction) {
     	//alert("reducer")
     	return Object.assign({}, state, {items: [...state.items, {description: action.description, date: action.date, amount: action.amount}]})
 
-   	case UPDATE_NOTE:
+   	//case UPDATE_NOTE:
     	//alert("update reducer")
-    	var temp_state = state;
-    	temp_state.items[0]["description"] = action.description;
-    	temp_state.items[0]["amount"] = action.amount;
-    	return Object.assign({}, state, {items: [...state.items]})
+   // 	var temp_state = state;
+   // 	temp_state.items[0]["description"] = action.description;
+   // 	temp_state.items[0]["amount"] = action.amount;
+   // 	return Object.assign({}, state, {items: [...state.items]})
 
 
    	//case ADD_TAG:
