@@ -1,4 +1,4 @@
-import { ADD_NOTE, UPDATE_NOTE, ADD_TAG } from "./types"
+import { ADD_NOTE, UPDATE_NOTE, ADD_NOTE_TAG } from "./types"
 
 
 export function addNote(title: any, note: any) {
@@ -25,12 +25,12 @@ export function updateNote(title: any, note: any) {
 }
 
 
-export function addTag(tag: any) {
+export function addNoteTag(tag: any) {
 
   //alert(title);
 
   return {
-    type: ADD_TAG,
+    type: ADD_NOTE_TAG,
     tag  
   }
 }

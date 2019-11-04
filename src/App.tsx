@@ -25,14 +25,14 @@ import { connect } from 'react-redux'
 
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
-import AddNote from "./AddNote";
-import BrowseNotes from "./BrowseNotes";
-import Note from "./Note";
+import AddNote from "./Notes/AddNote";
+import BrowseNotes from "./Notes/BrowseNotes";
+import Note from "./Notes/Note";
 
 import AddTag from "./AddTag";
 import BrowseTags from "./BrowseTags";
 
-import BrowseBudget from "./BrowseBudget";
+import BrowseBudget from "./Budget/BrowseBudget";
 
 
 const useStyles = makeStyles(theme => ({

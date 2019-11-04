@@ -27,7 +27,7 @@ function notes(state: NotesState = initialState, action: any) {
       return Object.assign({}, state, {notes: [...state.notes]})
 
 
-    case ADD_TAG:
+    case ADD_NOTE_TAG:
       //alert("reducer")
       return Object.assign({}, state, {notes: [...state.notes], tags:[...state.tags, action.tag]})
 

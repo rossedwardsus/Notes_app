@@ -2,7 +2,7 @@ import { createStore, applyMiddleware,  } from 'redux';
 //import logger from 'redux-logger';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-import reducers from './reducers';
+import reducers from './reducers/reducers';
 
 export interface State {notes_reducer: {notes:[], tags: []}, budget_reducer: {items: [], tags: []}}
 

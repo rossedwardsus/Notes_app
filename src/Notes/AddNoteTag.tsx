@@ -29,7 +29,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-import { addTag } from './actions';
+import { addNoteTag } from './actions';
 
 
 //import axios from 'axios';
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export class AddTag extends React.Component<any, any> {
+export class AddNoteTag extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {tag: "", note: "", checkedMoving: true, checkedReact: true}
@@ -158,10 +158,10 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-const AddTagConnected = connect(
+const AddNoteTagConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddTag)
+)(AddNoteTag)
 
-export default AddTagConnected
+export default AddNoteTagConnected
 
