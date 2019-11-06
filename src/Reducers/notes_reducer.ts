@@ -1,4 +1,4 @@
-import { ADD_NOTE, UPDATE_NOTE, ADD_TAG } from './types'
+import { ADD_NOTE, UPDATE_NOTE, ADD_NOTE_TAG } from '../types'
 
 
 export type NotesState = {

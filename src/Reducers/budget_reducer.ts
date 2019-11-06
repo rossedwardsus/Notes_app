@@ -1,35 +1,33 @@
-import { ADD_ITEM, UPDATE_NOTE, ADD_TAG } from './types'
+import { ADD_ITEM, ADD_ITEM_CATEGORY, UPDATE_NOTE, ADD_NOTE_TAG } from '../types'
 
 export type BudgetState = {
-  items: [{description: string, date: string, amount: string}],
+  items: [{description: string, category_name: any, date: string, amount: string}],
   tags: [any]
+  item_categories: [any]
 };
 
 const initialState: Readonly<BudgetState> = {
-  items: [{description: "groceries", date: "date", amount: "20.00"}], tags: ["move"]
+  items: [{description: "groceries", category_name: "cn", date: "date", amount: "20.00"}], tags: ["move"], item_categories: [{name: "groceries"}]
 }
 
 export type ADD_ITEM_TYPE = {type: string};
 
-export interface AddItemAction { type: string, description: string, date: any, amount: string }
+export interface AddItemAction { type: string, description: string, category_name: any, date: any, amount: string }
 
 export type ItemAction = AddItemAction;
 
-function notes(state: BudgetState = initialState, action: ItemAction) {
+function budget(state: BudgetState = initialState, action: ItemAction) {
   //if (typeof state === 'undefined') {
   //  return initialState
   //}
   switch (action.type) {
     case ADD_ITEM:
     	//alert("reducer")
-    	return Object.assign({}, state, {items: [...state.items, {description: action.description, date: action.date, amount: action.amount}]})
+    	return Object.assign({}, state, {items: [...state.items, {description: action.description, category_name: action.category_name, date: action.date, amount: action.amount}]})
 
-   	//case UPDATE_NOTE:
-    	//alert("update reducer")
-   // 	var temp_state = state;
-   // 	temp_state.items[0]["description"] = action.description;
-   // 	temp_state.items[0]["amount"] = action.amount;
-   // 	return Object.assign({}, state, {items: [...state.items]})
+   case ADD_ITEM_CATEGORY:
+      alert("reducer")
+      return Object.assign({}, state, {items: [...state.items], item_categories: [...state.item_categories, {name: action.category_name}]})
 
 
    	//case ADD_TAG:
@@ -45,4 +43,4 @@ function notes(state: BudgetState = initialState, action: ItemAction) {
   }
 }
 
-export default notes
+export default budget

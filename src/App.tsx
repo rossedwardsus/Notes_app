@@ -29,10 +29,12 @@ import AddNote from "./Notes/AddNote";
 import BrowseNotes from "./Notes/BrowseNotes";
 import Note from "./Notes/Note";
 
-import AddTag from "./AddTag";
-import BrowseTags from "./BrowseTags";
+import AddTag from "./Notes/AddNoteTag";
+import BrowseTags from "./Notes/BrowseNoteTags";
 
-import BrowseBudget from "./Budget/BrowseBudget";
+import Budget from "./Budget/Budget";
+import BudgetAddItemCategory from "./Budget/BudgetAddItemCategory";
+import BudgetAddItem from "./Budget/BudgetAddItem";
 
 
 const useStyles = makeStyles(theme => ({
@@ -118,6 +120,12 @@ const App: React.FC = (props: any) => {
                       <br/>
                       Notes/bill reminder/budger tracker
                       <br/>
+                      Move into left menu component
+                      <br/>
+                      add paper
+                      <br/>
+                      better links
+                      <br/>
                       <li>
                         <Link to="/notes/browse">Browse notes</Link>
                       </li>
@@ -140,7 +148,16 @@ const App: React.FC = (props: any) => {
                       Budget
                       <br/>
                       <li>
-                        <Link to="/budget/browse">Browse budget</Link>
+                        <Link to="/budget/browse">Budget</Link>
+                      </li>
+                      <li>
+                        <Link to="/budget/category/add">Add Budget Item Category</Link>
+                      </li>
+                      <li>
+                        <Link to="/budget/category/car">Budget Items by Categories</Link>
+                      </li>
+                      <li>
+                        <Link to="/budget/item/add">Budget Add Item</Link>
                       </li>
                     </ul>
                   </nav>
@@ -187,7 +204,11 @@ const App: React.FC = (props: any) => {
                   </Route>
                   <Route path="/tags/:tag" component={BrowseTags}>
                   </Route>
-                  <Route path="/budget/browse" component={BrowseBudget}>
+                  <Route path="/budget/browse" component={Budget}>
+                  </Route>
+                  <Route path="/budget/category/add" component={BudgetAddItemCategory}>
+                  </Route>
+                  <Route path="/budget/item/add" component={BudgetAddItem}>
                   </Route>
                </Switch>
             </Grid>

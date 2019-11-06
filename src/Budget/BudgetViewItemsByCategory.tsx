@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import '../App.css';
 
 import { connect } from 'react-redux'
 import { Dispatch, Action } from 'redux'
@@ -17,8 +17,8 @@ import {
 import { History } from 'history';
 
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+//import AppBar from '@material-ui/core/AppBar';
+//import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -36,6 +36,16 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import { withStyles } from '@material-ui/core/styles';
+
+
+
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -51,7 +61,7 @@ import { addItem } from '../Actions/budget_actions';
 
 //import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
@@ -70,7 +80,34 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
-}));
+  table: {
+    minWidth: 650,
+  },
+}));*/
+
+const styles = {
+  root: {
+      flexGrow: 1,
+    },
+    textField: {
+      //marginLeft: theme.spacing(1),
+      //marginRight: theme.spacing(1),
+      width: 200,
+    },
+    paper: {
+      height: 140,
+      width: 100,
+    },
+    menuButton: {
+      //marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+    table: {
+      minWidth: 650,
+    },
+}
 
 //"match":{"path":"/budget/browse","url":"/budget/browse","isExact":true,"params":{}}}
 
@@ -85,7 +122,7 @@ interface budgetState {
     selectedDate: any
 }
 
-class BrowseBudget extends React.Component<storeProps, budgetState> {
+export class BrowseBudget extends React.Component<storeProps, budgetState> {
   constructor(props: any) {
     super(props);
     this.state = {description: "", amount: "", selectedDate: new Date().toDateString()}
@@ -202,7 +239,31 @@ class BrowseBudget extends React.Component<storeProps, budgetState> {
             Car registration
             <br/>
             <br/>
-            {items.map((item: any) => <div>{item.description}{item.date}{item.amount}</div>)}
+            <Grid container spacing={2}>
+                {items.map((item: any) => <div key={item}><Grid item md={4}>{item.description}</Grid><Grid item md={4}>{item.date}</Grid><Grid item md={4}>{item.amount}</Grid></div>)}
+            </Grid>
+            <br/>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Description</TableCell>
+                  <TableCell align="right">Date</TableCell>
+                  <TableCell align="right">Amount($)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {items.map((item: any) => (
+                  <TableRow key={item.description}>
+                    <TableCell component="th" scope="row">
+                      {item.description}
+                    </TableCell>
+                    <TableCell align="right">{item.date}</TableCell>
+                    <TableCell align="right">{"$" + parseFloat(item.amount).toFixed(2)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
         </div>
       );
   }
@@ -237,5 +298,6 @@ const BrowseBudgetConnected = connect(
   mapDispatchToProps
 )(BrowseBudget)
 
-export default BrowseBudgetConnected
+//export default BrowseBudgetConnected
+export default withStyles(styles)(BrowseBudgetConnected);
 

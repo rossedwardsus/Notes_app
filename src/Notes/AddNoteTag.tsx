@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 
 import { connect } from 'react-redux'
 
@@ -29,7 +29,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-import { addNoteTag } from './actions';
+import { addNoteTag } from '../Actions/actions';
 
 
 //import axios from 'axios';
@@ -104,7 +104,7 @@ export class AddNoteTag extends React.Component<any, any> {
 
     //alert("add");
 
-    this.props.addTag(this.state.tag);
+    this.props.addNoteTag(this.state.tag);
 
   }
 
@@ -152,8 +152,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addTag(tag: any){
-      dispatch(addTag(tag))
+    addNoteTag(tag: any){
+      dispatch(addNoteTag(tag))
     }
   }
 }

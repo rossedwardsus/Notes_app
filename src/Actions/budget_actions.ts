@@ -1,7 +1,7 @@
-import { ADD_ITEM, UPDATE_NOTE, ADD_TAG } from "./types"
+import { ADD_ITEM, ADD_ITEM_CATEGORY, UPDATE_NOTE, ADD_NOTE_TAG } from "../types"
 
 
-export const addItem = (description: any, date: any, amount: any) => {
+export const addItem = (description: any, category_name: any, date: any, amount: any) => {
 
   return (dispatch: any) => {
 
@@ -13,8 +13,25 @@ export const addItem = (description: any, date: any, amount: any) => {
     dispatch({
       type: ADD_ITEM,
       description, 
+      category_name,
       date, 
       amount
+    })
+  }
+}
+
+export const addItemCategory = (category_name: any) => {
+
+  return (dispatch: any) => {
+
+  //return (dispatch: redux.Dispatch<Any>) => {
+
+    //addItemSuccess();
+  
+  //alert(title);
+    dispatch({
+      type: ADD_ITEM_CATEGORY,
+      category_name
     })
   }
 }
@@ -26,25 +43,3 @@ const addItemSuccess = (item: any) => ({
   }
 });
 
-
-export function updateNote(title: any, note: any) {
-
-  //alert(title);
-
-  return {
-    type: UPDATE_NOTE,
-    title, 
-    note
-  }
-}
-
-
-export function addTag(tag: any) {
-
-  //alert(title);
-
-  return {
-    type: ADD_TAG,
-    tag  
-  }
-}

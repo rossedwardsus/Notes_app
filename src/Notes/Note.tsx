@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 
 import { connect } from 'react-redux'
 
@@ -28,8 +28,8 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 
-import { updateNote } from './actions';
-import { getNote } from './selector_index'
+import { updateNote } from '../Actions/actions';
+import { getNote } from '../selector_index'
 
 
 //import axios from 'axios';
