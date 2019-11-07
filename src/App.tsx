@@ -19,6 +19,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Hidden from '@material-ui/core/Hidden';
 
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
 import { connect } from 'react-redux'
 
 //import axios from 'axios';
@@ -55,6 +58,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     position: 'fixed',
     bottom: 0,
+    color: "green"
+  },
+  action: {
+    color: "green",
   },
 }));
 
@@ -97,14 +104,12 @@ const App: React.FC = (props: any) => {
               <Typography variant="h6" className={classes.title}>
                 Notes
               </Typography>
-              <Button color="inherit" component={props => <Link to="/pets" {...props}/>}>Browse Notes</Button>
               <Button color="inherit" component={props => <Link to="/signup" {...props}/>}>Signup</Button>
               <Button color="inherit">Login</Button>
             </Toolbar>
           </AppBar>
         </div>
         <div>
-          <br/>
           <Grid container spacing={2}>
             <Grid item md={1}>
             </Grid>
@@ -162,33 +167,7 @@ const App: React.FC = (props: any) => {
                     </ul>
                   </nav>
                 </Hidden>
-                <br/>
-                Moving
-                <br/>
-                React
-                <br/>
-                Bottom nav
-                <br/>
-                Browse notes
-                <br/>
-                Add note
-                <br/>
-                <Hidden smUp>
-                  <BottomNavigation
-                    value={value}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
-                    showLabels
-                    className={classes.stickToBottom}
-                  >
-                    <BottomNavigationAction label="Notes" icon={<RestoreIcon />} component={Link} to="/notes/browse" />        
-                    <BottomNavigationAction label="Budget" icon={<FavoriteIcon />} component={Link} to="/notes/add" />
-                    <BottomNavigationAction label="Bills" icon={<LocationOnIcon />} />
-                  </BottomNavigation>
-                </Hidden>
-                <br/>
-            </Grid>
+              </Grid>
             <Grid item md={8}>
                <Switch>
                   <Route exact path="/notes/add">
@@ -211,6 +190,22 @@ const App: React.FC = (props: any) => {
                   <Route path="/budget/item/add" component={BudgetAddItem}>
                   </Route>
                </Switch>
+               <Hidden smUp>
+                  <Paper style={{backgroundColor: "green"}}>
+                    <BottomNavigation
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      showLabels
+                      className={classes.stickToBottom}
+                    >
+                      <BottomNavigationAction label="Notes" icon={<RestoreIcon />} component={Link} to="/notes/browse" />        
+                      <BottomNavigationAction label="Budget" icon={<FavoriteIcon />} component={Link} to="/notes/add" />
+                      <BottomNavigationAction label="Bills" icon={<LocationOnIcon />} />
+                    </BottomNavigation>
+                  </Paper>
+                </Hidden>
             </Grid>
           </Grid>
         </div>

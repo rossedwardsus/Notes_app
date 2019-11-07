@@ -155,9 +155,6 @@ export class BudgetAddItemCategory extends React.Component<storeProps, budgetSta
   
     return (
           <div>
-            <br/>
-            <br/>
-            <br/>
              <AppBar position="static">
               <Tabs value={location.pathname} onChange={() => {}} aria-label="simple tabs example">
                 <Tab label="Add Item" value={"/budget/item/add"} component={Link} to="/budget/item/add"/>

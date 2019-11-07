@@ -194,15 +194,11 @@ export class BudgetAddItem extends React.Component<storeProps, budgetState> {
   
     return (
           <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             <AppBar position="static">
               <Tabs value={location.pathname} onChange={() => {}} aria-label="simple tabs example">
                 <Tab label="Add Item" value={"/budget/item/add"} component={Link} to="/budget/item/add"/>
-                <Tab label="Add Item Category" value={"/budget/category/add"} component={Link} to="/budget/category/add"/>
-                <Tab label="Browse Budget" value={"/budget/browse"} component={Link} to="/budget/browse"/>
+                <Tab label="Item Categories" value={"/budget/category/add"} component={Link} to="/budget/category/add"/>
+                <Tab label="Budget" value={"/budget/browse"} component={Link} to="/budget/browse"/>
               </Tabs>
             </AppBar>
             <br/>
